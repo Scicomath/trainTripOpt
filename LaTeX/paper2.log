@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2014.4.7)  16 AUG 2014 14:10
+This is XeTeX, Version 3.1415926-2.3-0.9997.5 (MiKTeX 2.9) (preloaded format=xelatex 2014.4.7)  16 AUG 2014 15:11
 entering extended mode
 **paper2.tex
 (E:\CTGUMCM2014\Problem6\LaTeX\paper2.tex
@@ -915,7 +915,7 @@ LaTeX Font Warning: Font shape `EU1/SimSun(0)/m/sl' undefined
 (Font)              using `EU1/SimSun(0)/m/n' instead on input line 62.
 
 [2] [3] [4] [5]
-LaTeX Font Info:    Try loading font information for EU1+lmtt on input line 121
+LaTeX Font Info:    Try loading font information for EU1+lmtt on input line 130
 .
  ("D:\Program Files\CTEX\MiKTeX\tex\latex\euenc\eu1lmtt.fd"
 File: eu1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
@@ -945,7 +945,7 @@ Requested font "cmbx7" at 7.0pt
 Requested font "cmbx5" at 5.0pt
  -> cmbx5
 
-Underfull \hbox (badness 10000) in paragraph at lines 122--124
+Underfull \hbox (badness 10000) in paragraph at lines 131--133
 [][][][] [] [] [] [][][] [] [][][][] [] [][][] [] [][][][][][][][][][][][] [] [
 ][][][] [] [][][][][][] [] [][][][][][][] []
  []

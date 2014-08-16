@@ -78,19 +78,28 @@
 
 变量的定义：两站之间的里程为$x$，普通火车基本票率为$\eta_0$，动车组票率为$\eta_1$，高速动车组票率为$\eta_2$，区段起点为$m_i$，区段终点为$n_i$，递远递减率为$\varepsilon_i$，保险票率为$\sigma$，客票发展金为$w$，空调票率为$\phi$，从起始站点到第$p$个站点的票价为$w_p$，从起始站点到第 个站点的票价为$w_q$．
 
-\begin{description}
-  \item[普客] $W = \eta_0 (\sum_{i=1}^k (n_i - m_i)\varepsilon_i + (x - n_k))(1+\sigma)+w$
-  \item[普快] $W = \eta_0 (\sum_{i=1}^k (n_i - m_i)\varepsilon_i + (x - n_k))(1+\sigma+\lambda)+w$
-  \item[快速] $W = \eta_0 (\sum_{i=1}^k (n_i - m_i)\varepsilon_i + (x - n_k))(1+\sigma+2\lambda)+w$
-  \item[新空普客] $W = \eta_0 (\sum_{i=1}^k (n_i - m_i)\varepsilon_i + (x - n_k))(1+\sigma+\phi)+w$
-  \item[新空普快] $W = \eta_0 (\sum_{i=1}^k (n_i - m_i)\varepsilon_i + (x - n_k))(1+\sigma+\lambda+\phi)+w$
-  \item[新空快速] $W = \eta_0 (\sum_{i=1}^k (n_i - m_i)\varepsilon_i + (x - n_k))(1+\sigma+2\lambda+\phi)+w$
-  \item[新空特快] $W = \eta_0 (\sum_{i=1}^k (n_i - m_i)\varepsilon_i + (x - n_k))(1+\sigma+2\lambda+\phi)+w$
-  \item[动车组] $W = \eta_1 x$
-  \item[高速动车] $W = \eta_2 x$
-  \item[新空直达] $W = y_n - y_{n-1}$
-  \item[城际高速] $W = y_n - y_{n-1}$
-\end{description}
+\begin{table}[h]
+\centering
+\begin{tabular}{cl}
+\toprule
+列车类型 & 计算公式 \\
+\midrule
+  动车组 & $W_1 = \eta_1 x$ \\
+  高速动车 & $W_2 = \eta_2 x$ \\
+  新空直达 & $W_{3} = y_n - y_{n-1}$ \\
+  城际高速 & $W_{4} = y_n - y_{n-1}$ \\
+  普客 & $W_5 = \eta_0 (\sum_{i=1}^k (n_i - m_i)\varepsilon_i + (x - n_k))(1+\sigma)+w$ \\
+  普快 & $W_6 = \eta_0 (\sum_{i=1}^k (n_i - m_i)\varepsilon_i + (x - n_k))(1+\sigma+\lambda)+w$ \\
+  快速 & $W_7 = \eta_0 (\sum_{i=1}^k (n_i - m_i)\varepsilon_i + (x - n_k))(1+\sigma+2\lambda)+w$ \\
+  新空普客 & $W_8 = \eta_0 (\sum_{i=1}^k (n_i - m_i)\varepsilon_i + (x - n_k))(1+\sigma+\phi)+w$ \\
+  新空普快 & $W_9 = \eta_0 (\sum_{i=1}^k (n_i - m_i)\varepsilon_i + (x - n_k))(1+\sigma+\lambda+\phi)+w$ \\
+  新空快速 & $W_{10} = \eta_0 (\sum_{i=1}^k (n_i - m_i)\varepsilon_i + (x - n_k))(1+\sigma+2\lambda+\phi)+w$ \\
+  新空特快 & $W_{11} = \eta_0 (\sum_{i=1}^k (n_i - m_i)\varepsilon_i + (x - n_k))(1+\sigma+2\lambda+\phi)+w$ \\
+  \bottomrule
+\end{tabular}
+%\caption{}
+\end{table}
+
 通过编程计算得到每个车次的列车任意两点之间的票价．
 
 \section{问题一模型的建立与求解}
