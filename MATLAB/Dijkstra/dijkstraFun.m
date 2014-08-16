@@ -46,20 +46,6 @@ while ~isempty(S)
             end
         end
         
-%         [temp,index2] = sort(TS{u,v});
-%         index = find(temp>=t(u)+stopTime,1);
-%         while isempty(index)
-%             temp = temp + 24*60;
-%             index = find(temp>=t(u)+stopTime,1);
-%         end
-%         i = index2(index);
-%         %i = find(TS{u,v}>=t(u),1);
-%         if (t(v)>temp(index)+C{u,v}(i))
-%             p(v) = u;
-%             q(v) = i;
-%             t(v) = temp(index) + C{u,v}(i);
-%             S = union(S,v);
-%         end
     end
     if u == d
         return

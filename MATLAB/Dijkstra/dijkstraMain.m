@@ -1,10 +1,10 @@
 tic
-s = find(strcmp(station,'丹东'));
-d = find(strcmp(station,'宜昌东'));
+s = find(strcmp(station,'上海'));
+d = find(strcmp(station,'苏州'));
 beginH = 8;
 beginM = 0;
 beginTime = beginH*60 + beginM;
-[ t,p,q ] = dijkstraFun( adjMat,C,TS,s,d,beginTime,60 );
+[ t,p,q ] = dijkstraTurnFun( adjMat,C,TS,s,d,beginTime,60 );
 toc
 p(s) = 0;
 path = graphpred2path(p',d);

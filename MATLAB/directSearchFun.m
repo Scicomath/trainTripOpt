@@ -1,16 +1,8 @@
 function [ path,pathTime,pathCost ] = directSearchFun( data,trainList,adjMat,station,s_name,d_name )
-%save data5.mat
 
-%   s_No = 2358; % 起始点
-%   d_No = 1445; % 目的地
 [~,s_No] = intersect(station,s_name);
 [~,d_No] = intersect(station,d_name);
 
-% [~,s_No] = intersect(station,'天津');
-% [~,d_No] = intersect(station,'拉萨');
-% 
-% [~,s_No] = intersect(station,'宜昌东');
-% [~,d_No] = intersect(station,'北京西');
 %% 直达
 
 if isempty(trainList{s_No,d_No})
@@ -56,19 +48,4 @@ for i=1:size(path{2},1)
 end
 
 end
-%% 输出最优路线
-% % 直达最优路线
-% if isempty(path{1})
-%     fprintf('%s到%s ',station{s_No},station{d_No})
-%     fprintf('没有直达车次 为您推荐如下转乘方案：\n')
-% else
-%     % 输出路线
-%     disp(path{1})
-% end
-% 
-% % 一次转乘最优路线
-% [minTime, index] = sort(pathTime{2});
-% path{2} = path{2}(index,:);
-% pathTime{2} = minTime;
-% disp(path{2})
-%     
+
