@@ -121,9 +121,50 @@ $$\min f_2(x), \quad x \in D_1$$
 
 定义邻接矩阵$F$，若存在同一辆列车经过$v_i$和$v_j$，则$v_i$和$v_j$邻接，定义邻接矩阵如下：
 $$F = (f(v_i,v_j))_{n\times n} \in \{0,1\}^{n \times n}$$
+\[f(v_i,v_j) = \begin{cases}
+1, & (v_i,v_j) \in A \\
+0, & (v_i,v_j) \notin A
+\end{cases}\]
 
+定义每条边$a(v_i,v_j)$都有若干个行驶时间权值、发车时间权值和乘车费用权值，行驶时间权值为列车从$v_i$行驶到$v_j$的行驶时间，发车时间权值为列车从$v_i$行驶到$v_j$的列车的出发时间，乘车费用权值为列车从$v_i$行驶到$v_j$的费用。记时间权值为$c^k(v_i,v_j)$，发车时间权值为$t^k(v_i,v_j)$，费用权值为$w^k(v_i,v_j)$，若有$r$个车次经过站节点$v_i$和$v_j$，则$a(v_i,v_j)$有$r$个时间权值和费用权值，记$a(v_i,v_j)$得时间权值集合和费用权值集合分别为 $C(v_i,v_j)$、$W(v_i,v_j)$，有
+\[C(v_i,v_j) = \{c^1(v_i,v_j),c^2(v_i,v_j),\cdots,c^r(v_i,v_j)\}\]
+\[T(v_i,v_j) = \{t^1(v_i,v_j),t^2(v_i,v_j),\cdots,t^r(v_i,v_j)\}\]
+\[W(v_i,v_j) = \{w^1(v_i,v_j),w^2(v_i,v_j), \cdots, w^r(v_i,v_j)\}\]
 
+ 将从节点$n_0$到节点$n_k$的乘车方案表示为：
+  \[P = \{n_0^{x_0}, n_1^{x_1}, n_2^{x_2}, \cdots,n_m^{x_m},n_k^{x_k}\}\]
+ 其中$n_1,n_2,\cdots,n_m$为中转节点, $x_0$表示边$a(n_0,n_1)$的行驶时间权值、发车时间权值和费用权值分别取$c^{x_k}(n_0,n_1)$、$t^{x_k}(n_0,n_1)$和$w^{x_k}(n_0,n_1)$，同理$x_k$表示边$a(n_k,n_{k+1})$的行驶时间权值、发车时间权值和费用权值分别取$c^{x_k}(n_k,n_{k+1})$、$t^{x_k}(n_k,n_{k+1})$和$w^{x_k}(n_k,n_{k+1})$。
+ 
+ \subsubsection{目标函数}
+ 换乘次数$m$最小，在乘车方案 中换乘次数等于中间节点的数目：
+ \[\min M_{ij} = m\]
+ 
+乘车所用时间最少，乘车时间=所换乘列车的发车时间—从始点出发的列车的发车时间+乘坐换乘列车的行驶时间：
+\[\min T(n_0,n) = \min \sum_{ k=0}^{m} t^{x_k}(n_k,n_{k+1})  = t^{x_m}(n_m,n)-t^{x_m}(n_0,n_1)\]
 
+乘车所花费用最少，乘车费用等于从起始站到换乘站之间的车费加上从换乘站到终点站之间的车费：
+\[\min W(n_0,n) = \min \sum_{k=0}^{m} w^{x_k} (n_k,n_{k+1})\]
+
+\subsubsection{约束条件}
+换乘时从起点到达换乘站时的时间要小于换乘列车的出发时间，以保证能够顺利换乘车辆：
+\[
+t^{x_k}_k(n_k,n_{k+1}) + c^{k+1}_k (n_k+n_{k+1}) \leq t^{x_{k+1}}_{k+1}(n_{k+1},n_{n+2})
+\]
+
+换乘的站点之间要有路线存在，以保证能够换乘成功：
+\[
+\forall n_k, n_{k+1} \quad f(n_k,n_{k+1})=1 
+\]
+
+综上所述得到问题一的多目标优化模型如下：
+\begin{equation}
+\begin{array}{rrclcl}
+\displaystyle \min_{x} & \multicolumn{3}{l}{c^T x} \\
+\textrm{s.t.} & A x & \leq & b \\
+&\displaystyle \sum_{i=0}^{n} x_i & = & 1 \\
+& x_j & \geq & 0 & & \forall j \in N \\
+\end{array}
+\end{equation}
 \begin{thebibliography}{10}
 \bibitem{1} 全国大学生数学建模竞赛组委会, \textbf{高教社杯全国大学生数学建模竞赛论文格式规范}, 北京，2009
 \bibitem{CCT}张林波，\textbf{新版CCT的说明}，2006
