@@ -1,10 +1,10 @@
 tic
-s = find(strcmp(station,'白城'));
-d = find(strcmp(station,'青岛'));
+s = find(strcmp(station,'丹东'));
+d = find(strcmp(station,'宜昌东'));
 beginH = 8;
 beginM = 0;
 beginTime = beginH*60 + beginM;
-[ t,p,q ] = dijkstraTurnFun( adjMat,C,TS,s,d,beginTime,60 );
+[ t,p,q ] = dijkstraFun( adjMat,C,TS,s,d,beginTime,60 );
 toc
 p(s) = 0;
 path = graphpred2path(p',d);
@@ -24,6 +24,7 @@ end
 pathCost = pathCostFun( data,fullpath );
 [ totalTime,stopTime,startTime ] = timeFun( data,fullpath );
 displayFun( fullpath,pathCost,totalTime,station,trainNo )
+disp(stopTime)
 % s_No = 1579;
 % d_No = 933;
 % station(s_No)

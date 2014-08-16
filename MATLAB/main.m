@@ -52,7 +52,9 @@ if goOn == 1
         for i=1:length(path{2})
             n = bestIndex{2}(i);
             displayFun( path{2}(n,:),pathCost{2}(n),pathTime{2}(n),station,trainNo )
-            disp(stopTime{i})
+            h = floor(stopTime{i}./60);
+            m = mod(stopTime{i},60);
+            fprintf('中转站等待时间：%d小时%d分钟\n',h,m)
         end
     end
 end
