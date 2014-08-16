@@ -1,0 +1,200 @@
+\documentclass{cumcmart}
+\usepackage{graphicx}
+\usepackage{bbding}
+\usepackage{url}
+\usepackage{booktabs}
+\standardtilde
+\let\standardtilde=\relax
+\usepackage{CJK}
+\usepackage{subfigure}
+\usepackage{everb}
+\usepackage{amsmath,amssymb}
+\usepackage{multirow}
+\usepackage{fancybox}
+\usepackage[dvipsnames,svgnames,x11names]{xcolor}
+\newtheorem{thm}{定理}
+
+\setlength\parindent{2\ccwd}
+\begin{document}
+\title{铁路最优路线问题}
+%\displaytitle命令用于在承诺书上显示论文题目，注意，不能换行，如果题目特别长，要进行适当的缩写
+\xuanti{A}
+%\school命令用于在承诺书上显示学校名称。按要求，此处应填写全称
+\school{三峡大学}
+%以下命令分别显示队员及指导教师姓名
+
+\numbers{2010888}%参赛报名号
+\authorone{艾鑫}
+\authortwo{李露}
+\authorthree{黄彬}
+\advisor{教练组}
+%\theyear{2010}
+\theday{20}
+\maketitle
+\begin{cnabstract}%此处没有采用sbstract命名，是为了将来如果要加入英文摘要时扩展的方便
+这里写摘要。
+
+%\vskip 20pt
+%\begin{center}
+%\shadowbox{
+%\begin{minipage}{.8\textwidth}
+% 	 提请大家注意：摘要应该是一份简明扼要的详细摘要（包括关键词），在整篇论文评阅中占有重要权重，
+% 请认真书写（注意篇幅不能超过一页，且无需译成英文）。全国评阅时将首先根据摘要和论文整体结构及
+% 概貌对论文优劣进行初步筛选。
+%
+%\hfill ---\begin{small}2009年3月16日修订《全国大学生数学建模竞赛论文格式规范》\end{small}
+%\end{minipage}
+%}
+%\end{center}
+%
+%China\TeX 论坛定于2010年8月27日晚上进行数学建模\LaTeX 排版培训，大家可以通过视频会议或音频会议方式进行排版培训，可加入培训QQ群：100315889。
+%最后祝大家在全国建模中取得优异成绩。
+
+
+\cnkeywords{多目标最优化 \quad  呵呵\quad 呵呵}
+\end{cnabstract}
+
+
+%\tableofcontents\newpage%增加目录，要不要都可以。不想要的话，就在本行前加“%”（英文的百分号）
+\section{问题重述}
+\subsection{问题说明}
+铁路既是社会经济发展的重要载体之一，同时又为社会经济发展创造了前提条件。近几年来，在全社会客运量稳步上升的同时，长期以来铁路承运了大量旅客。相对于其他的运输方式铁路具有时间准确性高、运输能力大、运行比较平稳、安全性高等优点。同时火车也成为了旅途的首选交通运输工具。
+
+虽然目前铁路网络已经比较发达，但是仍然有很多地方之间并没有直接到达的铁路。并且在节假日期间，一些热门路线的火车票总是一票难求。在这种情况下，需要考虑换乘，即先从乘车站到换乘站，再从换乘站到目的站。
+
+\subsection{需要解决的问题}
+\begin{enumerate}
+  \item 给出任意两个站点之间的最优铁路路线问题的一般数学模型和算法。若两个站点之间有直达列车，需要考虑直达列车票已售罄情况下最优的换乘方案。根据附录数据，利用你们的模型和算法求出一下起点到终点的最优路线：丹东→宜昌、天津→拉萨、白城→青岛。
+  \item 假设你从打算从宜昌出发乘火车到上海、南京、杭州、苏州、无锡旅游最后回到宜昌，请建立相关数学模型，给出整个行程的最优路线。
+\end{enumerate}
+\section{数据处理}
+
+
+箱线图（又称盒须图）通过绘制连续型变量的五数总括，即最小值、下四分位数（第25百分位数）、中位数（第50百分位数）、上四分位数（第75百分位数）以及最大值，描述了连续型变量的分布。箱线图能够显示出可能为离群点的观测。
+\section{模型选择}
+    \subsection{Fisher线性判别分析}
+    最早提出合理的判别分析法者首推R. A. Fisher (1936)，Fisher提出将线性判别函数用于花卉分类上，将花卉的各种特征利用线性组合方法变成单变量值，再以单值比较方法来判别事物之间的差别。
+
+    设欲建立的线性判别函数为
+    \begin{equation}
+    Y = a_1 X_1 + a_2 X_2 + \cdots + a_p X_p = a' X
+    \end{equation}
+    使得该判别函数能根据指标$X_1, X_2, \cdots, X_p$之值区分各样品应归属哪一类。式中，$a_i (i = 1,2,\cdots,p)$称为判别系数。在判别函数式建立以后，还需求得临界值，作为判别的标准。
+    %\subsubsection{求Fisher线性判别函数}
+    Fisher判别准则要求各类之间的变异尽可能地大，而各类内部的变异尽可能的小。用分离度$\lambda$来表示即要求：
+    \begin{equation}
+      \lambda = \frac{| \overline{Y_1} - \overline{Y_2} |}{S_p} \quad \text{或} \quad \lambda = \frac{(\overline{Y_1} - \overline{Y_2})^2}{S_p^2}
+    \end{equation}
+    其中$S_p^2$为合并协方差矩阵，$S_p^2 = \frac{(n_1 - 1)S_1^2 + (n_2 - 1)S_2^2}{n_1 + n_2 - 2}$，$S_1^2$和$S_2^2$为各组的协方差矩阵。
+
+    \begin{thm}
+        线性组合$Y = a' X = (\overline{X_1} - \overline{X_2})' S_p^{-1} X$对所有可能的线性系数向量$a'$，使得$\lambda$达到最大，且最大值为$D^2 = (\overline{X_1} - \overline{X_2})' S_p^{-1} (\overline{X_1} - \overline{X_2})$
+    \end{thm}
+    %\subsubsection{计算判别界值}
+    求得$a_i$后，代入判别函数式即得判别函数。
+
+    求判别界值$Y_0$：把类1、类2中各指标的均数分别代入判别函数式：
+    \begin{equation}
+      \begin{cases}
+      \overline{Y_1} = a' \overline{X_1} \\
+      \overline{Y_2} = a' \overline{X_2}
+      \end{cases}
+    \end{equation}
+    然后以两均数的中点作为两类的界点：
+    \begin{equation}
+      Y_0 = \frac{\overline{Y_1} + \overline{Y_2}}{2}
+    \end{equation}
+    %\subsubsection{建立判别标准}
+
+    \subsection{距离判别法}
+    距离判别法的基本思想是：根据已知分类的数据，分别计算各类的重心，即各组的均值。距离判别的标准是：对任给的一次观测，若它与第$i$类的重心距离最近，就认为它来自第$i$类。
+    \subsection{Bayes判别法}
+    \subsection{神经网络}
+
+
+    \subsection{支持向量机}
+\section{模型检验}
+    \subsection{交叉验证}
+    \subsection{舍一验证法}
+\section{变量选择}
+    \subsection{相关性分析}
+    \subsection{主成分分析}
+%\section{背景简介}
+%\subsection{引言}
+%提请大家注意：摘要应该是一份~$a^2$~简明扼要的详细摘要（包括关键词），在整篇论文评阅中占有重要权重，
+% 请认真书写（注意篇幅不能超过一页，且无需译成英文）。全国评阅时将首先根据摘要和论文整体结构及
+% 概貌对论文优劣进行初步筛选。
+%\section{模型建立}
+%提请大家注意：摘要应该是一份简明扼要的详细摘要（包括关键词），在整篇论文评阅中占有重要权重，
+% 请认真书写（注意篇幅不能超过一页，且无需译成英文）。全国评阅时将首先根据摘要和论文整体结构及
+% 概貌对论文优劣进行初步筛选\cite{CCT}。
+%
+%
+%\section{符号说明}
+%\begin{theorem}
+%符号说明
+%\end{theorem}
+%
+%
+%\section{表格}
+%时刻\,$t$\,与高度\,$x$\,的关系如表\,\ref{tx}\,所示。
+%\begin{table}[htbp]
+%  \centering
+%\caption{{时刻\,$t$\,的高度\,$x$}}
+%\label{tx}
+%\begin{tabular}{|c|ccccccccccc|}
+%  \hline
+%   t/s & 0 & 3 & 6 & 9 & 12 & 15 & 18 & 21 & 24 & 27 & 30\\
+%  \hline
+%  x/m & 500 & 470 & 425 & 372 & 317 & 264 & 215 & 160 & 108 & 55 & 1\\
+%  \hline
+%\end{tabular}
+%\end{table}
+%
+%\section{图形}
+%
+%\begin{figure}[htbp]
+%  \centering
+%  % Requires \usepackage{graphicx}
+%  \includegraphics[width=8cm]{tu1.jpg}
+%  \caption{刻度与容量的关系图}\label{keduyurongliang}
+%\end{figure}
+%
+%
+%刻度与容量的关系图如图\,\ref{keduyurongliang}所示。
+%
+%%\begin{figure}[htbp]
+%%  % Requires \usepackage{graphicx}
+%%  \centering
+%%  \includegraphics[width=8cm]{tu1.jpg}}
+%%  \caption{刻度与容量的关系图}\label{keduyurongliang2}
+%%\end{figure}
+%
+%\section{结论}
+
+
+\begin{thebibliography}{10}
+\bibitem{1} 全国大学生数学建模竞赛组委会, \textbf{高教社杯全国大学生数学建模竞赛论文格式规范}, 北京，2009
+\bibitem{CCT}张林波，\textbf{新版CCT的说明}，2006
+\bibitem{2} \url{http://www.chinatex.org}
+\bibitem{3}Tobias Oetiker， \textbf{一份不太简短的\LaTeXe 介绍},{下载地址如下}\\
+    \url{http://tug.ctan.org/tex-archive/info/lshort/chinese/lshort-zh-cn.pdf}
+\bibitem{4} Alpha Huang， \textbf{latex-notes-zh-cn}，下载地址如下\\
+    \url{http://mirrors.xmu.edu.cn/CTAN/info/latex-notes-zh-cn/}
+\bibitem{lf}M.R.C. van Dongen,\textbf{\LaTeX-and-Friends},下载地址如下\\
+    \url{http://csweb.ucc.ie/~dongen/LaTeX-and-Friends.pdf}
+\bibitem{figure}Keith Reckdahl,\textbf{Using Import graphics in \LaTeXe}, 1997\\
+王磊翻译，\textbf{\LaTeXe 插图指南}，2000，下载地址如下\\
+\url{http://math.ecnu.edu.cn/~latex/docs/Chs_doc/Graphics3.pdf}
+\bibitem{HM}Addison Wesley，\textbf{Higher Mathematics}， 下载地址如下\\ \url{http://media.cism.it/attachments/ch8.pdf}
+\bibitem{11} 全国大学生数学建模竞赛组委会, \textbf{高教社杯全国大学生数学建模竞赛论文格式规范}, 北京，2009
+\bibitem{12} 全国大学生数学建模竞赛组委会, \textbf{高教社杯全国大学生数学建模竞赛论文格式规范}, 北京，2009
+\bibitem{13} 全国大学生数学建模竞赛组委会, \textbf{高教社杯全国大学生数学建模竞赛论文格式规范}, 北京，2009
+
+\bibitem{14} 全国大学生数学建模竞赛组委会, \textbf{高教社杯全国大学生数学建模竞赛论文格式规范}, 北京，2009
+\end{thebibliography}
+
+
+
+
+\end{document}
