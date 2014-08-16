@@ -42,7 +42,7 @@ while goOn~=1&&goOn~=0
     goOn = input('是否继续搜索一次转乘方案，若是输入1，否则输入0：');
 end
 if goOn == 1
-    [ path{2},pathTime{2},pathCost{2} ] = directSearchFun2(...
+    [ path{2},pathTime{2},pathCost{2},stopTime ] = directSearchFun2(...
         data,trainList,adjMat,station,s_name,d_name );
     if isempty(path{2})
         fprintf('%s到%s ',s_name,d_name)
@@ -52,6 +52,7 @@ if goOn == 1
         for i=1:length(path{2})
             n = bestIndex{2}(i);
             displayFun( path{2}(n,:),pathCost{2}(n),pathTime{2}(n),station,trainNo )
+            disp(stopTime{i})
         end
     end
 end

@@ -1,4 +1,4 @@
-function [ path,pathTime,pathCost ] = directSearchFun2( data,trainList,adjMat,station,s_name,d_name )
+function [ path,pathTime,pathCost,stopTime ] = directSearchFun2( data,trainList,adjMat,station,s_name,d_name )
 %UNTITLED4 此处显示有关此函数的摘要
 %   此处显示详细说明
 
@@ -43,8 +43,9 @@ path = [ones(length(path),1)*s_No path ones(length(path),1)*d_No];
 %     pathTime{1}(i) = timeFun( data,path{1}(i,:) );
 % end
 pathTime = zeros(size(path,1),1);
+stopTime = cell(size(path,1),1);
 for i=1:size(path,1)
-    pathTime(i) = timeFun( data,path(i,:) );
+    [pathTime(i),stopTime{i}] = timeFun( data,path(i,:) );
 end
 
 %% 计算费用
