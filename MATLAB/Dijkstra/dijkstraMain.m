@@ -1,10 +1,10 @@
 tic
-s = find(strcmp(station,''));
+s = find(strcmp(station,'µ¤¶«'));
 d = find(strcmp(station,'ÒË²ý¶«'));
-beginH = 8;
+beginH = 0;
 beginM = 0;
 beginTime = beginH*60 + beginM;
-[ t,p,q ] = dijkstraTurnFun( adjMat,C,TS,s,d,beginTime,60 );
+[ t,p,q ] = dijkstraFun( adjMat,C,TS,s,d,beginTime,0 );
 toc
 p(s) = 0;
 path = graphpred2path(p',d);

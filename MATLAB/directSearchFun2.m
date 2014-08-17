@@ -17,7 +17,7 @@ for i=1:length(stop)
         end
     end
 end
-path = [ones(length(path),1)*s_No path ones(length(path),1)*d_No];
+path = [ones(size(path,1),1)*s_No path ones(size(path,1),1)*d_No];
 %% º∆À„ ±º‰
 
 pathTime = zeros(size(path,1),1);

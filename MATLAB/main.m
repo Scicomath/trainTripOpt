@@ -49,7 +49,7 @@ if goOn == 1
         fprintf('没有一次转乘方案，无法搜索，Sorry\n')
     else
         [ bestIndex{2} ] = bestPathFun( pathCost{2},pathTime{2},type );
-        for i=1:length(path{2})
+        for i=1:size(path{2},1)
             n = bestIndex{2}(i);
             displayFun( path{2}(n,:),pathCost{2}(n),pathTime{2}(n),station,trainNo )
             h = floor(stopTime{i}./60);
