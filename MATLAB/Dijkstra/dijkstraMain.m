@@ -1,6 +1,6 @@
 tic
-s = find(strcmp(station,'上海'));
-d = find(strcmp(station,'苏州'));
+s = find(strcmp(station,''));
+d = find(strcmp(station,'宜昌东'));
 beginH = 8;
 beginM = 0;
 beginTime = beginH*60 + beginM;

@@ -31,7 +31,7 @@ if isempty(path{1})
     goOn = 1;
 else
     [ bestIndex{1} ] = bestPathFun( pathCost{1},pathTime{1},type );
-    for i=1:length(path{1})
+    for i=1:size(path{1},1)
         n = bestIndex{1}(i);
         displayFun( path{1}(n,:),pathCost{1}(n),pathTime{1}(n),station,trainNo )
     end
